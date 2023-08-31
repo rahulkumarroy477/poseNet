@@ -138,7 +138,7 @@ function setup() {
     capture.hide();
     posenet = ml5.poseNet(capture, () => console.log('model Loaded'));
     posenet.on('pose', recvPoses);
-    clothImage = loadImage('rshirt.jpg');
+    clothImage = loadImage('shirtcurved.png');
 }
 
 function recvPoses(poses) {
@@ -166,7 +166,7 @@ function draw() {
             let keypoint = keypoints[i].position;
             let scaledX = map(keypoint.x, 0, capture.width, 0, canvasWidth);
             let scaledY = map(keypoint.y, 0, capture.height, 0, canvasHeight);
-            // ellipse(scaledX, scaledY, 10, 10);
+            ellipse(scaledX, scaledY, 10, 10);
             
             // Store left and right shoulder and hip positions
             if (i === 5) {
@@ -200,7 +200,7 @@ function draw() {
             imageHeight = distanceBetweenMedians;
             
             // Draw the image at the calculated position
-            image(clothImage, rightShoulderX-35, rightShoulderY-35, imageWidth+100, imageHeight+100);
+            image(clothImage, rightShoulderX-35, rightShoulderY-imageHeight/5, imageWidth+imageWidth/2, imageHeight+100);
         }
 
         // Draw the skeleton lines
